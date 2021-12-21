@@ -81,6 +81,8 @@ class _RecipeListState extends State<RecipeList> {
         previousSearches = <String>[];
       }
     }
+
+    print('getPreviousSearches length:${previousSearches.length}');
   }
 
   @override
@@ -100,6 +102,7 @@ class _RecipeListState extends State<RecipeList> {
   }
 
   Widget _buildSearchCard() {
+    print('previousSearches.length:${previousSearches.length}');
     return Card(
       elevation: 4,
       shape: const RoundedRectangleBorder(
