@@ -38,3 +38,4 @@ Request _addQuery(Request req) {
   params['app_key'] = apiKey;
   return req.copyWith(parameters: params);
 }
+
