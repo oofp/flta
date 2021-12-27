@@ -23,7 +23,7 @@ class RecipeList extends StatefulWidget {
 
 class _RecipeListState extends State<RecipeList> {
   static const String prefSearchKey = 'previousSearches';
-
+  static int recipe_id = 0;
   late TextEditingController searchTextController;
   final ScrollController _scrollController = ScrollController();
   List<APIHits> currentSearchList = [];
@@ -35,6 +35,11 @@ class _RecipeListState extends State<RecipeList> {
   bool loading = false;
   bool inErrorState = false;
   List<String> previousSearches = <String>[];
+
+  int get_next_recipe_id() {
+    recipe_id++;
+    return recipe_id;
+  }
 
   @override
   void initState() {
@@ -285,6 +290,7 @@ class _RecipeListState extends State<RecipeList> {
         Navigator.push(topLevelContext, MaterialPageRoute(
           builder: (context) {
             final detailRecipe = Recipe(
+                id: get_next_recipe_id(),
                 label: recipe.label,
                 image: recipe.image,
                 url: recipe.url,

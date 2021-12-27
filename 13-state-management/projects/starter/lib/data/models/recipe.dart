@@ -15,7 +15,7 @@ class Recipe extends Equatable {
 
   // 3
   Recipe(
-      {this.id,
+      {required this.id,
       this.label,
       this.image,
       this.url,
