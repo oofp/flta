@@ -8,11 +8,15 @@ import 'data/repository.dart';
 import 'network/recipe_service.dart';
 import 'network/service_interface.dart';
 import 'ui/main_screen.dart';
+import 'data/sqlite/sqlite_repository.dart';
 
 Future<void> main() async {
   _setupLogging();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  final repository = SqliteRepository();
+  await repository.init();
+
+  runApp(MyApp(repository: repository));
 }
 
 void _setupLogging() {
@@ -23,7 +27,8 @@ void _setupLogging() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final Repository repository;
+  const MyApp({Key? key, required this.repository}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -32,7 +37,8 @@ class MyApp extends StatelessWidget {
         providers: [
           Provider<Repository>(
             lazy: false,
-            create: (_) => MemoryRepository(),
+            create: (_) => repository,
+            dispose: (_, Repository repository) => repository.close(),
           ),
           Provider<ServiceInterface>(
             create: (_) => RecipeService.create(),
