@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.raywenderlich.RayChat">
+    package="com.qvkly.RayChat">
    <application
         android:label="RayChat"
         android:icon="@mipmap/ic_launcher">
